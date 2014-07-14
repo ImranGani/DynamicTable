@@ -1,0 +1,71 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Drawing;
+
+public partial class _Default : System.Web.UI.Page 
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        Label1.Text = "Image Welcomes you.";
+        Label1.ForeColor = Color.Red;
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        //Function 1: Checks each character whether space is there.
+        for (int i = 0; i < TextBox1.Text.Length; i++)
+        {
+            if (TextBox1.Text[i].ToString()==" ")
+                Label1.Text = "space is there in between...";
+            else
+                continue;
+        }
+
+        //Function 2: Direct replace fro space as No-space(nil) and '-' as nil.
+        string name = TextBox1.Text.Replace(" ", "").Replace("-", "");
+
+        //Function 3: Checks each character whether space is there, with the help of IndexOf() fn/.
+        if (TextBox1.Text.IndexOf(" ") >= 0)
+            Label1.Text = "space is there in between...";
+        else
+            Label1.Text = "good ...";
+
+        //Function 4: Checks each character whether it has any special char, with the help of IndexOf() fn/.
+        char[] check = { " ", "\'", ";", ":", "[", "]", "\"", "{", "}", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "+", "<", ">", "?", "/", "|", "\\" };
+        for (int i = 0; i < check.Length; i++)
+        {
+            if (TextBox1.Text.IndexOf(check[i]) >= 0)
+            {
+                Label1.Text = "Invalid entry...";
+                break;
+            }
+            else
+                Label1.Text = "good ...";
+        }
+
+        //Function 5: Checks each character whether it has any special char, with the help of Contains() fn/.
+        string check = " \';:[],{}!@#$%^&*()_-+<>?/|\\";
+        for (int i = 0; i < check.Length; i++)
+        {
+            //string a = check[i].ToString();
+            if (TextBox1.Text.Contains(check[i].ToString()) == true)
+            {
+                Label1.Text = "Invalid entry...";
+                break;
+            }
+            else
+                Label1.Text = "good ...";
+        }
+
+        //Function 6: use to Split the String.
+        string LanguageKnown1 = "English/Hindi/Tamil/";
+        string[] sptLanguageKnown1 = LanguageKnown1.Split('/');
+        Label1.Text = sptLanguageKnown1.ToString();
+    }
+}

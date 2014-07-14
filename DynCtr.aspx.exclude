@@ -1,0 +1,37 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="DynCtr.aspx.cs" Inherits="DynCtr" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Untitled Page</title>
+</head>
+<body>
+<script runat="server" language="C#">
+    void CreateTextBoxes(Object sender, EventArgs e)
+    {
+        int n = Int32.Parse(txtTBCount.Text);
+        for (int i = 0; i < n; i++)
+        {
+            lblControlList.Text = i+1 + "TextBoxs";
+            TextBoxesHere.Controls.Add(new TextBox());
+        }
+    }
+</script>
+
+<form id="Form1" runat="server">
+    <h4>How many TextBoxes would you like to create?</h4>(<i>Please choose vaule between 1 and 10</i>)<br />
+    <asp:textbox runat="Server" id="txtTBCount" Columns="3" />
+    <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtTBCount"
+             MinimumValue="1" MaximumValue="10" Type="Integer"
+             ErrorMessage="Make sure that you choose a value between 1 and 10!" />
+    <br />
+    <asp:button ID="Button1" runat="server" Text="Create Dynamic TextBoxes"
+           OnClick="CreateTextBoxes" />
+	<p>
+	<asp:label runat="server" id="lblControlList" />
+	<asp:PlaceHolder runat="server" id="TextBoxesHere" />
+	</p>
+</form>
+</body>
+</html>
